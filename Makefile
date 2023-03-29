@@ -9,10 +9,10 @@ OWNER?=bdist
 # Need to list the images in build dependency order
 # All of the images
 ALL_IMAGES:= \
-	sql-notebook
+	db-notebook
 
 AARCH64_IMAGES:= \
-	sql-notebook
+	db-notebook
 
 # Enable BuildKit for Docker build
 export DOCKER_BUILDKIT:=1
@@ -23,7 +23,7 @@ export DOCKER_BUILDKIT:=1
 help:
 	@echo "bdist/notebook"
 	@echo "====================="
-	@echo "Replace % with a stack directory name (e.g., make build/sql-notebook)"
+	@echo "Replace % with a stack directory name (e.g., make build/db-notebook)"
 	@echo
 	@grep -E '^[a-zA-Z0-9_%/-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 

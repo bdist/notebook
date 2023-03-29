@@ -1,4 +1,4 @@
-# bdist/sql-notebook
+# bdist/db-notebook
 
 To build this:
 
