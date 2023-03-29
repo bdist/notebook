@@ -1,9 +1,5 @@
-# bdist/notebook
+# bdist/sql-notebook
 
 To build this:
 
-`docker build .`
-
-To build this from scratch:
-
-`docker build --no-cache .`
+`make build/%`
