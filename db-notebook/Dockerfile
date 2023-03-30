@@ -8,20 +8,24 @@ LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# Install Node.js-based language servers
+RUN npm install -g --save-dev \
+    sql-language-server
+
+
 USER ${NB_UID}
 
 # Install Python 3 packages
 RUN mamba install --yes \
-    'black' \
-    'isort' \
     'psycopg' \
-    'psycopg-c' && \
+    'psycopg-c' \
+    'jupyterlab-lsp' \
+    'python-lsp-server' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
 # Install Python 3 packages (not available via mamba)
 RUN pip install --quiet --no-cache-dir \
-    'ipython-sql' \
-    'jupyterlab-code-formatter' && \
+    'ipython-sql' && \
     fix-permissions "/home/${NB_USER}"
