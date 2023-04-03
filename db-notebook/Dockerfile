@@ -17,6 +17,8 @@ USER ${NB_UID}
 
 # Install Python 3 packages
 RUN mamba install --yes \
+    'duckdb-engine' \
+    'python-duckdb' \
     'psycopg' \
     'psycopg-c' \
     'jupyterlab-lsp' \
@@ -27,5 +29,5 @@ RUN mamba install --yes \
 
 # Install Python 3 packages (not available via mamba)
 RUN pip install --quiet --no-cache-dir \
-    'ipython-sql' && \
+    'git+https://github.com/tonykploomber/jupysql.git@234-fix-sqlalchemy-2-compatibility' && \
     fix-permissions "/home/${NB_USER}"
