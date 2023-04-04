@@ -29,5 +29,6 @@ RUN mamba install --yes \
 
 # Install Python 3 packages (not available via mamba)
 RUN pip install --quiet --no-cache-dir \
-    'git+https://github.com/tonykploomber/jupysql.git@234-fix-sqlalchemy-2-compatibility' && \
+    'pgspecial==2.0.1' \
+    'git+https://github.com/ploomber/jupysql.git@refs/pull/339/merge' && \
     fix-permissions "/home/${NB_USER}"
