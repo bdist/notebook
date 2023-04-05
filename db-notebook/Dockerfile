@@ -27,8 +27,10 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install Python 3 packages (not available via mamba)
+# Install jupysql and dependencies
 RUN pip install --quiet --no-cache-dir \
+    'psycopg2' \
+    'psycopg2-binary' \
     'pgspecial==2.0.1' \
     'git+https://github.com/ploomber/jupysql.git@refs/pull/339/merge' && \
     fix-permissions "/home/${NB_USER}"
