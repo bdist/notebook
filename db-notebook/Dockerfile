@@ -1,6 +1,6 @@
 # Copyright (c) Flavio Martins.
 # Distributed under the terms of the Modified BSD License.
-FROM jupyter/scipy-notebook:2023-04-03
+FROM jupyter/scipy-notebook:2023-04-10
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 
@@ -29,8 +29,8 @@ RUN mamba install --yes \
 
 # Install jupysql and dependencies
 RUN pip install --quiet --no-cache-dir \
-    'psycopg2' \
-    'psycopg2-binary' \
+    'git+https://github.com/ploomber/jupysql.git@master' \
     'pgspecial==2.0.1' \
-    'git+https://github.com/ploomber/jupysql.git@refs/pull/339/merge' && \
+    'psycopg2' \
+    'psycopg2-binary'  && \
     fix-permissions "/home/${NB_USER}"
