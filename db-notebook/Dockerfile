@@ -1,6 +1,6 @@
 # Copyright (c) Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>
 # Distributed under the terms of the Modified BSD License.
-FROM jupyter/scipy-notebook:2023-04-27
+FROM jupyter/scipy-notebook:2023-05-15
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 
