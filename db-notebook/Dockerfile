@@ -46,9 +46,8 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install JupySQL and PostgreSQL Python drivers
+# Install PostgreSQL Python drivers
 RUN mamba install --yes \
-    'jupysql' \
     'psycopg2' \
     'psycopg2-binary' \
     'pgspecial==2.0.1' \
@@ -57,6 +56,11 @@ RUN mamba install --yes \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+# Install jupysql (pip needed for sqlalchemy 2.0.*)
+RUN pip install --quiet --no-cache-dir \
+    'jupysql' && \
+     fix-permissions "/home/${NB_USER}"
 
 # Install DuckDB engine and library
 RUN mamba install --yes \
