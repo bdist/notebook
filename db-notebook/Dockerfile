@@ -70,6 +70,9 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
+RUN pip install --quiet --no-cache-dir \
+    'jupyterlab_execute_time==2.*' && \
+     fix-permissions "/home/${NB_USER}"
 
 USER ${NB_UID}
 
