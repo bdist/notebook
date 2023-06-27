@@ -6,7 +6,7 @@ bdist/db-notebook includes popular packages from the data science Python ecosyst
 
 Everything in [jupyter/scipy-notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-scipy-notebook) and its ancestor images
 
-PostgreSQL 15.2 client
+PostgreSQL 15.3 client
 
 jupysql to run SQL in Jupyter/IPython via a %sql and %%sql magics.
 
