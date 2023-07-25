@@ -27,6 +27,7 @@ USER ${NB_UID}
 
 # Install Python language server
 RUN mamba install --yes \
+    'jupyterlab_execute_time==2.*' \
     'jupyterlab-lsp' \
     'python-lsp-server' && \
     mamba clean --all -f -y && \
@@ -57,22 +58,14 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install jupysql (pip needed for sqlalchemy 2.0.*)
-RUN pip install --quiet --no-cache-dir \
-    'jupysql' && \
-     fix-permissions "/home/${NB_USER}"
-
-# Install DuckDB engine and library
+# Install JupySQL, and DuckDB engine and library
 RUN mamba install --yes \
-    'duckdb-engine' \
+    'jupysql' && \
+    'duckdb-engine' && \
     'python-duckdb' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
-
-RUN pip install --quiet --no-cache-dir \
-    'jupyterlab_execute_time==2.*' && \
-     fix-permissions "/home/${NB_USER}"
 
 USER ${NB_UID}
 
