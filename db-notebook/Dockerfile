@@ -60,8 +60,8 @@ RUN mamba install --yes \
 
 # Install JupySQL, and DuckDB engine and library
 RUN mamba install --yes \
-    'jupysql' && \
-    'duckdb-engine' && \
+    'jupysql' \
+    'duckdb-engine' \
     'python-duckdb' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
