@@ -1,6 +1,6 @@
 # Copyright (c) Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>
 # Distributed under the terms of the Modified BSD License.
-FROM jupyter/scipy-notebook:2023-05-15
+FROM jupyter/scipy-notebook:2023-08-19
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 
@@ -25,10 +25,14 @@ RUN apt-get update --yes && \
 
 USER ${NB_UID}
 
+# Install jupyterlab-lsp
+RUN pip install --quiet --no-cache-dir \
+    'jupyterlab-lsp==5.0.0b0' \
+    'jupyter-lsp==2.2.0' && \
+     fix-permissions "/home/${NB_USER}"
+
 # Install Python language server
 RUN mamba install --yes \
-    'jupyterlab_execute_time==2.*' \
-    'jupyterlab-lsp' \
     'python-lsp-server' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
@@ -40,8 +44,9 @@ RUN npm install -g --save-dev \
     npm cache clean --force && \
     fix-permissions "/home/${NB_USER}"
 
-# Install SQLite
+# Install extras
 RUN mamba install --yes \
+    'jupyterlab_execute_time==3.*' \
     'sqlite' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
