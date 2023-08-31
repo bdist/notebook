@@ -65,7 +65,7 @@ RUN mamba install --yes \
 
 # Install JupySQL, and DuckDB engine and library
 RUN mamba install --yes \
-    'jupysql' \
+    'jupysql==0.10.1' \
     'duckdb-engine' \
     'python-duckdb' && \
     mamba clean --all -f -y && \
