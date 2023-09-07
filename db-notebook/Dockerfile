@@ -27,7 +27,7 @@ USER ${NB_UID}
 
 # Install jupyterlab-lsp
 RUN pip install --quiet --no-cache-dir \
-    'jupyterlab-lsp==5.0.0b0' \
+    'jupyterlab-lsp==5.0.0b1' \
     'jupyter-lsp==2.2.0' && \
      fix-permissions "/home/${NB_USER}"
 
