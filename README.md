@@ -1,12 +1,12 @@
-# Jupyter Notebook Data Science Python Stack
+# Jupyter Notebook Databases Stack
 
 [Source on GitHub](https://github.com/bdist/db-notebook) | [Dockerfile commit history](https://github.com/bdist/db-notebook/commits/main/db-notebook/Dockerfile) | [Docker Hub image tags](https://hub.docker.com/r/bdist/db-notebook/tags/)
 
-bdist/db-notebook includes popular packages from the data science Python ecosystem.
+bdist/db-notebook includes popular packages from the scientific Python ecosystem.
 
-Everything in [jupyter/scipy-notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-scipy-notebook) and its ancestor images
+Everything in [jupyter/minimal-notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-minimal-notebook) and its ancestor images
 
-PostgreSQL 15.3 client
+Includes client utilities for PostgreSQL 11, 12, 13, 14, 15.
 
 jupysql to run SQL in Jupyter/IPython via a %sql and %%sql magics.
 
