@@ -52,14 +52,6 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install DuckDB engine and library
-RUN mamba install --yes \
-    'duckdb-engine' \
-    'python-duckdb' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
 # Install extras
 RUN mamba install --yes \
     'jupyterlab_execute_time==3.*' && \
