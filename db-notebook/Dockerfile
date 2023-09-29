@@ -1,6 +1,6 @@
 # Copyright (c) Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>
 # Distributed under the terms of the Modified BSD License.
-FROM jupyter/minimal-notebook:2023-09-18
+FROM jupyter/minimal-notebook:2023-09-25
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 
@@ -45,19 +45,21 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install JupySQL
-RUN mamba install --yes \
-    'jupysql' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
 # Install extras
 RUN mamba install --yes \
     'jupyterlab_execute_time==3.*' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+# Install JupySQL
+RUN pip install --quiet --no-cache-dir \
+    'jupysql' \
+    'jupysql-plugin' && \
+    fix-permissions "/home/${NB_USER}"
+
+COPY --chown=${NB_USER}:${NB_GROUP} .jupyter/lab/user-settings/jupysql-plugin/settings.jupyterlab-settings \
+    "/home/${NB_USER}/.jupyter/lab/user-settings/jupysql-plugin/settings.jupyterlab-settings"
 
 # Install jupyterlab-lsp
 RUN pip install --quiet --no-cache-dir \
