@@ -1,6 +1,6 @@
 # Copyright (c) Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>
 # Distributed under the terms of the Modified BSD License.
-FROM jupyter/minimal-notebook:2023-09-18
+FROM jupyter/minimal-notebook:2023-09-25
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 
