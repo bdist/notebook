@@ -61,7 +61,7 @@ RUN mamba install --yes \
 
 # Install jupyterlab-lsp
 RUN pip install --quiet --no-cache-dir \
-    'jupyterlab-lsp==5.0.0rc0' && \
+    'jupyterlab-lsp==5.0.0rc1' && \
      fix-permissions "/home/${NB_USER}"
 
 # Install Python language server
