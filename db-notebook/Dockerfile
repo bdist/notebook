@@ -17,11 +17,11 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main" > /etc/ap
 # Install the PostgreSQL utilities
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    postgresql-client-11 \
     postgresql-client-12 \
     postgresql-client-13 \
     postgresql-client-14 \
-    postgresql-client-15 && \
+    postgresql-client-15 \
+    postgresql-client-16 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
