@@ -59,13 +59,9 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install jupyterlab-lsp
-RUN pip install --quiet --no-cache-dir \
-    'jupyterlab-lsp==5.0.0rc1' && \
-     fix-permissions "/home/${NB_USER}"
-
 # Install Python language server
 RUN mamba install --yes \
+    'jupyterlab-lsp==5.0.0' \
     'python-lsp-server' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
