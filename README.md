@@ -11,3 +11,7 @@ Includes client utilities for PostgreSQL 11, 12, 13, 14, and 15.
 jupysql to run SQL in Jupyter/IPython via a %sql and %%sql magics.
 
 sql-language-server offers autocompletion, error/warning notifications, and other editor support.
+
+## Credits
+
+Flavio Martins
