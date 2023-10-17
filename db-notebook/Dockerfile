@@ -42,11 +42,17 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install PostgreSQL Python drivers
+# Install PostgreSQL Python drivers v2
 RUN mamba install --yes \
     'psycopg2' \
     'psycopg2-binary' \
-    'pgspecial==2.0.1' \
+    'pgspecial==2.0.1' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install PostgreSQL Python drivers v3
+RUN mamba install --yes \
     'psycopg' \
     'psycopg-c' && \
     mamba clean --all -f -y && \
