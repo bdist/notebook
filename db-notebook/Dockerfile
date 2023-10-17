@@ -45,8 +45,7 @@ RUN mamba install --yes \
 # Install PostgreSQL Python drivers v2
 RUN mamba install --yes \
     'psycopg2' \
-    'psycopg2-binary' \
-    'pgspecial==2.0.1' && \
+    'psycopg2-binary' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
@@ -61,7 +60,8 @@ RUN mamba install --yes \
 
 # Install JupySQL
 RUN mamba install --yes \
-    'jupysql' && \
+    'jupysql' \
+    'pgspecial==2.0.1' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
