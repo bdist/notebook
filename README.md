@@ -6,11 +6,13 @@ bdist/db-notebook includes popular packages from the scientific Python ecosystem
 
 Everything in [jupyter/minimal-notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-minimal-notebook) and its ancestor images
 
-Includes client utilities for PostgreSQL 11, 12, 13, 14, and 15.
+Includes client utilities for PostgreSQL 12, 13, 14, 15 and 16.
 
 jupysql to run SQL in Jupyter/IPython via a %sql and %%sql magics.
 
 sql-language-server offers autocompletion, error/warning notifications, and other editor support.
+
+python-lsp-ruff a linter plugin for pylsp based on ruff.
 
 ## Credits
 
