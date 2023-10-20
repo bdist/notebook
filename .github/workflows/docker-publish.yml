@@ -6,12 +6,22 @@ name: Docker
 # documentation.
 
 on:
+  pull_request:
+    paths:
+      - ".github/workflows/docker-publish.yml"
+      - "db-notebook/**"
+      - "!README.md"
+      - "requirements-dev.txt"
   push:
-    branches: ["main"]
+    branches:
+      - main
     # Publish all tags as releases.
     tags: ["*"]
-  pull_request:
-    branches: ["main"]
+    paths:
+      - ".github/workflows/docker-publish.yml"
+      - "db-notebook/**"
+      - "!README.md"
+      - "requirements-dev.txt"
 
 env:
   REPO_NAME: ${{ github.event.repository.name }}
