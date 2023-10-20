@@ -77,7 +77,7 @@ RUN mamba install --yes \
 RUN mamba install --yes \
     'jupyterlab-lsp' \
     'python-lsp-server' \
-    'python-lsp-ruff' && \
+    'python-lsp-ruff==1.5.3' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
