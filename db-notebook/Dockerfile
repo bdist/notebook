@@ -1,6 +1,6 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
-FROM jupyter/minimal-notebook:2023-09-25
+FROM jupyter/minimal-notebook:2023-10-20
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 
@@ -77,7 +77,7 @@ RUN mamba install --yes \
 RUN mamba install --yes \
     'jupyterlab-lsp' \
     'python-lsp-server' \
-    'python-lsp-ruff==1.5.3' && \
+    'python-lsp-ruff' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
