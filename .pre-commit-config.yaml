@@ -14,13 +14,13 @@
 repos:
   # Autoupdate: Python code
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
+    rev: v3.14.0
     hooks:
       - id: pyupgrade
         args: [--py39-plus]
 
   # Automatically sort python imports
-  - repo: https://github.com/pycqa/isort
+  - repo: https://github.com/PyCQA/isort
     rev: 5.12.0
     hooks:
       - id: isort
@@ -28,19 +28,27 @@ repos:
 
   # Autoformat: Python code
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.9.1
     hooks:
       - id: black
         args: [--target-version=py39]
 
   # Check python code static typing
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.0.1
+    rev: v1.5.1
     hooks:
       - id: mypy
         args: [--config, ./mypy.ini]
         additional_dependencies:
-          ["numpy", "pytest", "requests", "types-requests", "types-tabulate"]
+          [
+            "numpy",
+            "pytest",
+            "requests",
+            "urllib3",
+            "types-requests",
+            "types-tabulate",
+            "types-urllib3",
+          ]
         # Unfortunately, `pre-commit` only runs on changed files
         # This doesn't work well with `mypy --follow-imports error`
         # See: https://github.com/pre-commit/mirrors-mypy/issues/34#issuecomment-1062160321
@@ -52,7 +60,7 @@ repos:
 
   # Autoformat: YAML, JSON, Markdown, etc.
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.0-alpha.6
+    rev: v3.0.3
     hooks:
       - id: prettier
 
@@ -66,22 +74,33 @@ repos:
       - id: trailing-whitespace
 
   # Lint: Dockerfile
-  - repo: https://github.com/hadolint/hadolint.git
+  - repo: https://github.com/hadolint/hadolint
     rev: v2.12.1-beta
     hooks:
       - id: hadolint-docker
         entry: hadolint/hadolint:v2.12.1-beta hadolint
 
+  # Lint: Dockerfile
+  # We're linting .dockerfile files as well
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.1-beta
+    hooks:
+      - id: hadolint-docker
+        name: Lint *.dockerfile Dockerfiles
+        entry: hadolint/hadolint:v2.12.1-beta hadolint
+        types: [file]
+        files: \.dockerfile$
+
   # Lint: YAML
-  - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.29.0
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.32.0
     hooks:
       - id: yamllint
         args: ["-d {extends: relaxed, rules: {line-length: disable}}", "-s"]
         files: \.(yaml|yml)$
 
   # Lint: Bash scripts
-  - repo: https://github.com/openstack-dev/bashate.git
+  - repo: https://github.com/openstack/bashate
     rev: 2.1.1
     hooks:
       - id: bashate
@@ -89,20 +108,20 @@ repos:
 
   # Lint: Shell scripts
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.9.0.2
+    rev: v0.9.0.6
     hooks:
       - id: shellcheck
         args: ["-x"]
 
   # Lint: Python
   - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
       - id: flake8
 
   # Lint: Markdown
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.33.0
+    rev: v0.37.0
     hooks:
       - id: markdownlint
         args: ["--fix"]
@@ -116,7 +135,7 @@ repos:
   # nbQA provides tools from the Python ecosystem like
   # pyupgrade, isort, black, and flake8, adjusted for notebooks.
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.6.3
+    rev: 1.7.0
     hooks:
       - id: nbqa-pyupgrade
         args: [--py39-plus]
@@ -126,13 +145,13 @@ repos:
       - id: nbqa-flake8
 
   # Run black on python code blocks in documentation files.
-  - repo: https://github.com/asottile/blacken-docs
-    rev: 1.13.0
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: 1.16.0
     hooks:
       - id: blacken-docs
         # --skip-errors is added to allow us to have python syntax highlighting even if
         # the python code blocks includes jupyter specific additions such as % or !
-        # See https://github.com/asottile/blacken-docs/issues/127 for an upstream
+        # See https://github.com/adamchainz/blacken-docs/issues/127 for an upstream
         # feature request about this.
         args: [--target-version=py39, --skip-errors]
 
