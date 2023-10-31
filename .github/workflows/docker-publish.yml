@@ -9,7 +9,7 @@ on:
   pull_request:
     paths:
       - ".github/workflows/docker-publish.yml"
-      - "db-notebook/**"
+      - "notebook/**"
       - "!README.md"
       - "requirements-dev.txt"
   push:
@@ -19,7 +19,7 @@ on:
     tags: ["*"]
     paths:
       - ".github/workflows/docker-publish.yml"
-      - "db-notebook/**"
+      - "notebook/**"
       - "!README.md"
       - "requirements-dev.txt"
 
