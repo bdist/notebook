@@ -90,4 +90,7 @@ RUN npm install -g --save-dev \
 
 USER ${NB_UID}
 
+COPY --chown=${NB_UID}:${NB_UID} ./.psqlrc ${HOME}/.psqlrc
+COPY --chown=${NB_UID}:${NB_UID} ./.sqliterc ${HOME}/.sqliterc
+
 WORKDIR "${HOME}"
