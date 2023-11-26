@@ -36,7 +36,7 @@ RUN mamba install --yes \
 
 # Install redis
 RUN mamba install --yes \
-    'redis-server==7.2.*' \
+    'redis-server==7.*' \
     'redis-py' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
