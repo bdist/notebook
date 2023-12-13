@@ -82,12 +82,6 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install SQL language server
-RUN npm install -g --save-dev \
-    sql-language-server && \
-    npm cache clean --force && \
-    fix-permissions "/home/${NB_USER}"
-
 # Install pgcli
 RUN mamba install --yes \
     'pgcli' && \
