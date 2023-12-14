@@ -10,8 +10,6 @@ Includes client utilities for PostgreSQL 12, 13, 14, 15 and 16.
 
 jupysql to run SQL in Jupyter/IPython via a %sql and %%sql magics.
 
-sql-language-server offers autocompletion, error/warning notifications, and other editor support.
-
 python-lsp-ruff a linter plugin for pylsp based on ruff.
 
 ## Credits
