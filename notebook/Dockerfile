@@ -70,7 +70,7 @@ RUN mamba install --yes \
 RUN mamba install --yes \
     'jupyter-archive' \
     'jupyterlab-spellchecker' \
-    'jupyterlab_execute_time==3.*' && \
+    'jupyterlab_execute_time' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
