@@ -69,9 +69,8 @@ RUN mamba install --yes \
 # Install extras
 RUN mamba install --yes \
     'jupyter-archive' \
-    'jupyterlab-spellchecker' \
-    'jupyterlab-unfold' \
-    'jupyterlab_execute_time' && \
+    'jupyterlab_execute_time' \
+    'jupyterlab-spellchecker' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
