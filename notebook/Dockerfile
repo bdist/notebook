@@ -45,7 +45,8 @@ RUN mamba install --yes \
 # Install PostgreSQL Python drivers v3
 RUN mamba install --yes \
     'psycopg' \
-    'psycopg-c' && \
+    'psycopg-c' \
+    'psycopg-pool' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
