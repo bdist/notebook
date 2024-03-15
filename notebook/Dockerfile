@@ -59,10 +59,17 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install extras
+# Install measurement extras
+RUN mamba install --yes \
+    'jupyter-resource-usage' \
+    'jupyterlab_execute_time' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install utility extras
 RUN mamba install --yes \
     'jupyter-archive' \
-    'jupyterlab_execute_time' \
     'jupyterlab-spellchecker' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
