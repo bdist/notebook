@@ -28,17 +28,17 @@ RUN apt-get update --yes && \
 
 USER ${NB_UID}
 
-# Install pgcli
+# Install PostgreSQL Python drivers
 RUN mamba install --yes \
-    'pgcli' && \
+    'psycopg' \
+    'psycopg-c' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install PostgreSQL Python drivers v3
+# Install PostgreSQL Python extras
 RUN mamba install --yes \
-    'psycopg' \
-    'psycopg-c' \
+    'pgcli' \
     'psycopg-pool' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
