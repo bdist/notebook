@@ -51,6 +51,13 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
+# Install sqlite-utils
+RUN mamba install --yes \
+    'sqlite-utils' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
 # Install sqlpkg
 RUN curl -sS https://webi.sh/sqlpkg | sh && \
     fix-permissions "/home/${NB_USER}"
