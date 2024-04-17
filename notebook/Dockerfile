@@ -76,6 +76,7 @@ RUN mamba install --yes \
 
 # Install DuckDB
 RUN mamba install --yes \
+    'duckdb-cli' \
     'duckdb-engine' \
     'python-duckdb' && \
     mamba clean --all -f -y && \
