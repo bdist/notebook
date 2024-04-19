@@ -30,10 +30,7 @@ RUN apt-get update --yes && \
 RUN ln -sf /usr/bin/fdfind /usr/local/bin/fd
 
 # Install fx
-ENV FX_VERSION=34.0.0
-COPY install_fx.sh /
-RUN bash /install_fx.sh && \
-    rm /install_fx.sh
+RUN curl -sS https://fx.wtf/install.sh | sh
 
 USER ${NB_UID}
 
