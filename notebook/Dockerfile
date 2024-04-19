@@ -29,6 +29,12 @@ RUN apt-get update --yes && \
 # Alias fd to fdfind
 RUN ln -sf /usr/bin/fdfind /usr/local/bin/fd
 
+# Install fx
+ENV FX_VERSION=34.0.0
+COPY install_fx.sh /
+RUN bash /install_fx.sh && \
+    rm /install_fx.sh
+
 USER ${NB_UID}
 
 # Install PostgreSQL Python drivers
@@ -132,12 +138,6 @@ RUN mamba install --yes \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
-
-# Install fx
-ENV FX_VERSION=34.0.0
-COPY install_fx.sh /
-RUN bash /install_fx.sh && \
-    rm /install_fx.sh
 
 USER ${NB_UID}
 
