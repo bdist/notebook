@@ -135,7 +135,9 @@ RUN mamba install --yes \
 
 # Install fx
 ENV FX_VERSION=34.0.0
-RUN ./install_fx.sh
+COPY install_fx.sh /
+RUN bash /install_fx.sh && \
+    rm /install_fx.sh
 
 USER ${NB_UID}
 
