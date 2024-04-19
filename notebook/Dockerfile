@@ -1,6 +1,6 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
-FROM quay.io/jupyter/minimal-notebook:2024-04-15
+FROM quay.io/jupyter/minimal-notebook:2024-04-19
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 
@@ -17,6 +17,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main" > /etc/ap
 # Install the PostgreSQL utilities
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
+    fd-find \
     pspg \
     postgresql-client-12 \
     postgresql-client-13 \
@@ -25,15 +26,10 @@ RUN apt-get update --yes && \
     postgresql-client-16 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Alias fd to fdfind
+RUN ln -sf /usr/bin/fdfind /usr/local/bin/fd
 
 USER ${NB_UID}
-
-# TODO: Remove this when the base image is fixed
-RUN mamba install --yes \
-    'notebook==7.1.3' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
 
 # Install PostgreSQL Python drivers
 RUN mamba install --yes \
@@ -136,6 +132,10 @@ RUN mamba install --yes \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+# Install fx
+ENV FX_VERSION=34.0.0
+RUN ./install_fx.sh
 
 USER ${NB_UID}
 
