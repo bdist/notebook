@@ -92,8 +92,7 @@ RUN mamba install --yes \
 
 # Install JupySQL
 RUN mamba install --yes \
-    'jupysql' \
-    'pgspecial==2.0.1' && \
+    'jupysql' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
