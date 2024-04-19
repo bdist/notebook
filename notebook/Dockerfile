@@ -28,18 +28,25 @@ RUN apt-get update --yes && \
 
 USER ${NB_UID}
 
-# Install PostgreSQL Python drivers
+# TODO: Remove this when the base image is fixed
 RUN mamba install --yes \
-    'psycopg' \
-    'psycopg-c' && \
+    'notebook==7.1.3' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install PostgreSQL Python extras
+# Install PostgreSQL Python drivers
 RUN mamba install --yes \
-    'pgcli' \
+    'psycopg' \
+    'psycopg-c' \
     'psycopg-pool' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install PostgreSQL extras
+RUN mamba install --yes \
+    'pgcli' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
@@ -116,6 +123,20 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
+# Install utils
+RUN mamba install --yes \
+    'file' \
+    'git-delta' \
+    'git-lfs' \
+    'htop' \
+    'jq' \
+    'ncdu' \
+    'ripgrep' \
+    'rclone' \
+    'rsync' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
 
 USER ${NB_UID}
 
