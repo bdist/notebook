@@ -127,6 +127,7 @@ RUN mamba install --yes \
     'git-delta' \
     'git-lfs' \
     'htop' \
+    'jc' \
     'jq' \
     'ncdu' \
     'ripgrep' \
