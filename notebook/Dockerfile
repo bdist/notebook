@@ -25,9 +25,6 @@ RUN apt-get update --yes && \
     postgresql-client-16 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install fx
-RUN curl -sS https://fx.wtf/install.sh | sh
-
 USER ${NB_UID}
 
 # Install PostgreSQL Python drivers
