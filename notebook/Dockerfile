@@ -17,7 +17,6 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main" > /etc/ap
 # Install the PostgreSQL utilities
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    fd-find \
     pspg \
     postgresql-client-12 \
     postgresql-client-13 \
@@ -25,9 +24,6 @@ RUN apt-get update --yes && \
     postgresql-client-15 \
     postgresql-client-16 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Alias fd to fdfind
-RUN ln -sf /usr/bin/fdfind /usr/local/bin/fd
 
 # Install fx
 RUN curl -sS https://fx.wtf/install.sh | sh
@@ -123,6 +119,7 @@ RUN mamba install --yes \
 
 # Install utils
 RUN mamba install --yes \
+    'fd-find' \
     'file' \
     'git-delta' \
     'git-lfs' \
