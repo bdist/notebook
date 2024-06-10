@@ -57,14 +57,6 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install sqlpkg
-RUN curl -sS https://webi.sh/sqlpkg | sh && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install sqlean
-RUN "/home/${NB_USER}/.local/bin/sqlpkg" install nalgeon/sqlean && \
-    fix-permissions "/home/${NB_USER}"
-
 # Install redis
 RUN mamba install --yes \
     'redis-server==7.2.*' \
