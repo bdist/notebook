@@ -68,8 +68,14 @@ RUN mamba install --yes \
 # Install DuckDB
 RUN mamba install --yes \
     'duckdb-cli' \
-    'duckdb-engine' \
     'python-duckdb' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install DuckDB SQLAlchemy driver
+RUN mamba install --yes \
+    'duckdb-engine' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
