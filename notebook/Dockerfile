@@ -89,7 +89,6 @@ RUN mamba install --yes \
 
 # Install measurement extras
 RUN mamba install --yes \
-    'jupyter-resource-usage' \
     'jupyterlab_execute_time' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
