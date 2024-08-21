@@ -1,6 +1,6 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
-FROM quay.io/jupyter/minimal-notebook:2024-08-12
+FROM quay.io/jupyter/minimal-notebook:2024-08-19
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 
