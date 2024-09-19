@@ -17,12 +17,13 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt noble-pgdg main 17" > /etc
 # Install the PostgreSQL utilities
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    pspg \
+    postgresql-client-12 \
     postgresql-client-13 \
     postgresql-client-14 \
     postgresql-client-15 \
     postgresql-client-16 \
-    postgresql-client-17 && \
+    postgresql-client-17 \
+    pspg && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_UID}
