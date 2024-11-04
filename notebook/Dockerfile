@@ -15,6 +15,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt noble-pgdg main" > /etc/ap
     wget --no-hsts --quiet -O /etc/apt/trusted.gpg.d/pgdg.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
 
 # Install the PostgreSQL utilities
+# hadolint ignore=DL3008
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     postgresql-client-12 \
