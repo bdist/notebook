@@ -1,6 +1,6 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
-FROM quay.io/jupyter/minimal-notebook:2024-10-23
+FROM quay.io/jupyter/base-notebook:2024-11-04
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 
@@ -9,6 +9,34 @@ LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 USER root
+
+# Install all OS dependencies for a fully functional Server
+# hadolint ignore=DL3008
+RUN apt-get update --yes && \
+    apt-get install --yes --no-install-recommends \
+    # Common useful utilities
+    curl \
+    git \
+    nano-tiny \
+    tzdata \
+    unzip \
+    vim-tiny \
+    # git-over-ssh
+    openssh-client \
+    # `less` is needed to run help in R
+    # see: https://github.com/jupyter/docker-stacks/issues/1588
+    less \
+    # `nbconvert` dependencies
+    # https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex
+    # texlive-xetex \
+    # texlive-fonts-recommended \
+    # texlive-plain-generic \
+    # Enable clipboard on Linux host systems
+    xclip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Create alternative for nano -> nano-tiny
+RUN update-alternatives --install /usr/bin/nano nano /bin/nano-tiny 10
 
 # Create the file repository configuration and Import the repository signing key
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt noble-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
