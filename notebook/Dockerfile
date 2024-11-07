@@ -88,8 +88,9 @@ RUN mamba install --yes \
     fix-permissions "/home/${NB_USER}"
 
 # Install redis
-RUN mamba install --yes \
-    'redis-server==7.2.*' \
+RUN echo 'redis-server=7.2.*' >> "${CONDA_DIR}/conda-meta/pinned" && \
+    mamba install --yes \
+    'redis-server' \
     'redis-py' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
