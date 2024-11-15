@@ -114,6 +114,13 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
+# Install collaboration extras
+RUN mamba install --yes \
+    'jupyter-collaboration' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
 # Install utils
 RUN mamba install --yes \
     'bat' \
