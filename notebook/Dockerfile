@@ -47,6 +47,31 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
+# Install redis
+RUN echo 'redis-server=7.2.*' >> "${CONDA_DIR}/conda-meta/pinned" && \
+    mamba install --yes \
+    'redis-server' \
+    'redis-py' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install DuckDB and SQLalchemy driver
+RUN mamba install --yes \
+    'duckdb-cli' \
+    'duckdb-engine' \
+    'python-duckdb' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install sqlite
+RUN mamba install --yes \
+    'sqlite' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
 # Install PostgreSQL Python drivers
 RUN mamba install --yes \
     'psycopg' \
@@ -59,37 +84,6 @@ RUN mamba install --yes \
 # Install PostgreSQL extras
 RUN mamba install --yes \
     'pgcli' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install sqlite
-RUN mamba install --yes \
-    'sqlite' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install redis
-RUN echo 'redis-server=7.2.*' >> "${CONDA_DIR}/conda-meta/pinned" && \
-    mamba install --yes \
-    'redis-server' \
-    'redis-py' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install DuckDB
-RUN mamba install --yes \
-    'duckdb-cli' \
-    'python-duckdb' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install DuckDB SQLAlchemy driver
-RUN mamba install --yes \
-    'duckdb-engine' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
