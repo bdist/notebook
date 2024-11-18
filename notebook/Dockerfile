@@ -105,15 +105,6 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install Python language server
-RUN mamba install --yes \
-    'jupyterlab-lsp' \
-    'python-lsp-server' \
-    'python-lsp-ruff' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
 # Install collaboration extras
 RUN mamba install --yes \
     'jupyter-collaboration' && \
