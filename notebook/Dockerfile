@@ -29,6 +29,24 @@ RUN apt-get update --yes && \
 
 USER ${NB_UID}
 
+# Install utils
+RUN mamba install --yes \
+    'bat' \
+    'fd-find' \
+    'file' \
+    'git-delta' \
+    'git-lfs' \
+    'htop' \
+    'jc' \
+    'jq' \
+    'ncdu' \
+    'ripgrep' \
+    'rclone' \
+    'rsync' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
 # Install PostgreSQL Python drivers
 RUN mamba install --yes \
     'psycopg' \
@@ -108,24 +126,6 @@ RUN mamba install --yes \
 # Install collaboration extras
 RUN mamba install --yes \
     'jupyter-collaboration' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install utils
-RUN mamba install --yes \
-    'bat' \
-    'fd-find' \
-    'file' \
-    'git-delta' \
-    'git-lfs' \
-    'htop' \
-    'jc' \
-    'jq' \
-    'ncdu' \
-    'ripgrep' \
-    'rclone' \
-    'rsync' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
