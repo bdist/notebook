@@ -3,6 +3,7 @@
 FROM quay.io/jupyter/minimal-notebook:2024-11-19
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
+ARG NB_BUILD=0
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
