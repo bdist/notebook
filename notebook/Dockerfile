@@ -3,11 +3,38 @@
 FROM quay.io/jupyter/minimal-notebook:2024-12-03
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
-ARG NB_BUILD=1
+ARG NB_BUILD=2
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+USER root
+
+# hadolint ignore=DL3008
+RUN apt-get update --yes && \
+    apt-get install --yes --no-install-recommends \
+    # for latex labels
+    cm-super \
+    dvipng \
+    lmodern && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+USER ${NB_UID}
+
+# Install Python 3 packages
+RUN mamba install --yes \
+    'conda-forge::blas=*=openblas' \
+    'ipywidgets' \
+    'jupyterlab-git' \
+    'openpyxl' \
+    'pandas' \
+    'sqlalchemy' \
+    'widgetsnbextension' \
+    'xlrd' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
 
 USER root
 
@@ -19,7 +46,6 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt noble-pgdg main" > /etc/ap
 # hadolint ignore=DL3008
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    lmodern \
     postgresql-client-12 \
     postgresql-client-13 \
     postgresql-client-14 \
@@ -109,13 +135,6 @@ RUN mamba install --yes \
 RUN mamba install --yes \
     'jupyter-archive' \
     'jupyter-collaboration' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install pandas
-RUN mamba install --yes \
-    'pandas' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
