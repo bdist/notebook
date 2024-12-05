@@ -3,7 +3,7 @@
 FROM quay.io/jupyter/minimal-notebook:2024-12-03
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
-ARG NB_BUILD=2
+ARG NB_BUILD=3
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
@@ -21,6 +21,16 @@ RUN apt-get update --yes && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_UID}
+
+# Temporary fix for blank screen bug with jupyter-collaboration
+# to remove when updating to the next minimal-notebook version
+RUN mamba update --yes \
+    'conda-libmamba-solver' \
+    'jupyterlab' \
+    'notebook' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
 
 # Install Python 3 packages
 RUN mamba install --yes \
