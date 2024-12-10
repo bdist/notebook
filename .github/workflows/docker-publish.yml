@@ -84,7 +84,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v6
         with:
-          context: ${{ env.REPO_NAME }}
+          context: image/
           platforms: |-
             linux/amd64
             linux/arm64
