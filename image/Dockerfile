@@ -50,7 +50,8 @@ RUN apt-get update --yes && \
     postgresql-client-15 \
     postgresql-client-16 \
     postgresql-client-17 \
-    pspg && \
+    pspg \
+    pgloader && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_UID}
