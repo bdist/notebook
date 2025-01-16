@@ -140,7 +140,8 @@ jobs:
           tags: |
             type=schedule,pattern={{date 'YYYY-MM-DD'}}
             type=ref,event=tag
-            type=edge,branch=$repo.default_branch
+            type=edge,branch=main
+            type=sha
 
       - name: Create manifest list and push
         if: github.event_name != 'pull_request'
