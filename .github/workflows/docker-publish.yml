@@ -139,9 +139,7 @@ jobs:
             ${{ env.GHCR_REPO }}
           tags: |
             type=schedule,pattern={{date 'YYYY-MM-DD'}}
-            type=ref,event=branch
             type=ref,event=tag
-            type=ref,event=pr
 
       - name: Create manifest list and push
         if: github.event_name != 'pull_request'
