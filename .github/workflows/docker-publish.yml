@@ -144,6 +144,7 @@ jobs:
             ${{ env.GHCR_REPO }}
           tags: |
             type=schedule,pattern={{date 'YYYY-MM-DD'}}
+            type=ref,event=branch
             type=ref,event=tag
             type=edge,branch=main
             type=sha
