@@ -44,7 +44,6 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt noble-pgdg main" > /etc/ap
 # Install the PostgreSQL utilities
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    postgresql-client-12 \
     postgresql-client-13 \
     postgresql-client-14 \
     postgresql-client-15 \
