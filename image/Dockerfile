@@ -1,6 +1,6 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
-FROM quay.io/jupyter/minimal-notebook:2025-03-03
+FROM quay.io/jupyter/minimal-notebook:2025-03-31
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 ARG NB_BUILD=0
@@ -20,6 +20,9 @@ RUN apt-get update --yes && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_UID}
+
+# Pin conda packages?
+RUN echo 'pandas=2.2.3' >> "${CONDA_DIR}/conda-meta/pinned"
 
 # Install Python 3 packages
 RUN mamba install --yes \
@@ -54,9 +57,6 @@ RUN apt-get update --yes && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_UID}
-
-# Pin conda packages?
-RUN echo 'pandas=2.2.3' >> "${CONDA_DIR}/conda-meta/pinned"
 
 # Install utils
 RUN mamba install --yes \
