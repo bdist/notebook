@@ -4,7 +4,7 @@
 # https://ghcr.io/bdist/notebook?tab=tags
 ARG REGISTRY=ghcr.io
 ARG OWNER=bdist
-ARG BASE_IMAGE=$REGISTRY/$OWNER/notebook:2025-06-02
+ARG BASE_IMAGE=$REGISTRY/$OWNER/notebook:2025-06-05
 FROM $BASE_IMAGE
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
@@ -13,7 +13,7 @@ LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ENV TAG="2025-06-02"
+ENV TAG="2025-06-05"
 
 COPY --chown=${NB_UID}:${NB_GID} binder/README.ipynb "${HOME}"/README.ipynb
 
