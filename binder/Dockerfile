@@ -43,5 +43,5 @@ RUN initdb \
     --auth-local=md5 \
     --auth-host=md5
 
-# start the PostgreSQL server
-RUN pg_ctl -D "$PGDATA" -l "$PGDATA/postgresql.log" start
+# create startup script for PostgreSQL
+COPY --chown=${NB_UID}:${NB_GID} binder/start-postgresql.sh "${HOME}"/start-postgresql.sh
