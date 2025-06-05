@@ -26,7 +26,6 @@ USER ${NB_UID}
 ENV PGHOST=localhost \
     PGPORT=5432 \
     PGUSER=postgres \
-    PGPASSWORD=postgres \
     PGDATABASE=postgres \
     PGDATA="${HOME}/data/pgsql"
 
@@ -37,7 +36,7 @@ RUN mkdir -p "$PGDATA" \
 # initialize the database with password authentication
 RUN initdb \
     --username="$PGUSER" \
-    --pwfile=<(printf "%s\n" "$PGPASSWORD") \
+    --pwfile=<(printf "%s\n" "postgres") \
     --encoding=UTF8 \
     --locale=C \
     --auth-local=md5 \
