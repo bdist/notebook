@@ -34,10 +34,14 @@ ENV PGHOST=localhost \
 RUN mkdir -p "$PGDATA" \
     && chown -R "${NB_UID}:${NB_GID}" "$PGDATA"
 
-# initialize the database
+# initialize the database with password authentication
 RUN initdb \
     --username="$PGUSER" \
-    --pwfile=<(printf "%s\n" "$PGPASSWORD")
+    --pwfile=<(printf "%s\n" "$PGPASSWORD") \
+    --encoding=UTF8 \
+    --locale=C \
+    --auth-local=md5 \
+    --auth-host=md5
 
 # start the PostgreSQL server
 RUN pg_ctl -D "$PGDATA" -l "$PGDATA/postgresql.log" start
