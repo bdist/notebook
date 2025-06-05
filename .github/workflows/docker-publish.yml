@@ -9,6 +9,7 @@ on:
   pull_request:
     paths:
       - ".github/workflows/docker-publish.yml"
+      - "!binder/**"
       - "image/**"
       - "!README.md"
       - "requirements-dev.txt"
@@ -19,6 +20,7 @@ on:
     tags: ["*"]
     paths:
       - ".github/workflows/docker-publish.yml"
+      - "!binder/**"
       - "image/**"
       - "!README.md"
       - "requirements-dev.txt"
