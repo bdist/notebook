@@ -1,6 +1,0 @@
-#!/bin/bash
-set -eux
-
-PGDATA=${PGDATA:-/home/jovyan/srv/pgsql}
-pg_ctl -D "$PGDATA" -l "$PGDATA/pg.log" start
-exec "$@"
