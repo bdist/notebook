@@ -4,7 +4,7 @@
 # https://ghcr.io/bdist/notebook?tab=tags
 ARG REGISTRY=ghcr.io
 ARG OWNER=bdist
-ARG BASE_IMAGE=$REGISTRY/$OWNER/notebook:2025-06-05
+ARG BASE_IMAGE=$REGISTRY/$OWNER/notebook:2025-06-16
 FROM $BASE_IMAGE
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
