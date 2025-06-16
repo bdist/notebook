@@ -13,7 +13,7 @@ LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ENV TAG="2025-06-05"
+ENV TAG="2025-06-16"
 
 COPY --chown=${NB_UID}:${NB_GID} binder/README.ipynb "${HOME}"/README.ipynb
 
