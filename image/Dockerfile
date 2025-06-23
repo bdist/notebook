@@ -1,6 +1,6 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
-FROM quay.io/jupyter/minimal-notebook:2025-06-16
+FROM quay.io/jupyter/minimal-notebook:2025-06-23
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 ARG NB_BUILD=0
@@ -84,6 +84,7 @@ RUN mamba install --yes \
 
 # Install sqlite
 RUN mamba install --yes \
+    'icu' \
     'sqlite' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
