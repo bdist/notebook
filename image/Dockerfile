@@ -21,9 +21,6 @@ RUN apt-get update --yes && \
 
 USER ${NB_UID}
 
-# Pin conda packages?
-RUN echo 'pandas=2.2.3' >> "${CONDA_DIR}/conda-meta/pinned"
-
 # Install Python 3 packages
 RUN mamba install --yes \
     'conda-forge::blas=*=openblas' \
