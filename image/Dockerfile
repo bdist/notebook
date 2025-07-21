@@ -2,7 +2,7 @@
 # Distributed under the terms of the Modified BSD License.
 FROM clickhouse/clickhouse-server:latest AS clickhouse
 
-FROM quay.io/jupyter/minimal-notebook:2025-11-19
+FROM quay.io/jupyter/minimal-notebook:2025-11-10
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 ARG NB_BUILD=0
@@ -24,6 +24,7 @@ RUN apt-get update --yes && \
 # Install ClickHouse Client
 COPY --from=clickhouse /usr/bin/clickhouse /usr/bin/clickhouse
 COPY --from=clickhouse /usr/bin/clickhouse-client /usr/bin/clickhouse-client
+RUN clickhouse-client --version
 
 USER ${NB_UID}
 
