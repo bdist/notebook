@@ -36,7 +36,8 @@ RUN mamba install --yes \
     fix-permissions "/home/${NB_USER}"
 
 # Install PostgreSQL
-RUN mamba install --yes \
+RUN echo 'postgresql=18.*' >> "${CONDA_DIR}/conda-meta/pinned" && \
+    mamba install --yes \
     postgresql \
     pspg && \
     mamba clean --all -f -y && \
