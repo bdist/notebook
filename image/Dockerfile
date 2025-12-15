@@ -114,8 +114,8 @@ RUN mamba install --yes \
 
 # Install ClickHouse Python drivers
 RUN mamba install --yes \
-    'clickhouse-driver' \
-    'clickhouse-sqlalchemy' && \
+    'clickhouse-connect' \
+    'clickhouse-driver' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
