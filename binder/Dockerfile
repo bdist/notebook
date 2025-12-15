@@ -4,7 +4,7 @@
 # https://ghcr.io/bdist/notebook?tab=tags
 ARG REGISTRY=ghcr.io
 ARG OWNER=bdist
-ARG BASE_IMAGE=$REGISTRY/$OWNER/notebook:2025-11-19
+ARG BASE_IMAGE=$REGISTRY/$OWNER/notebook:2025-12-15
 FROM $BASE_IMAGE
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
@@ -13,7 +13,7 @@ LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ENV TAG="2025-11-19"
+ENV TAG="2025-12-15"
 
 COPY --chown=${NB_UID}:${NB_GID} binder/README.ipynb "${HOME}"/README.ipynb
 
@@ -42,5 +42,6 @@ RUN initdb \
     --auth-local=md5 \
     --auth-host=md5
 
-# create startup script for PostgreSQL
+# create scripts for PostgreSQL
 COPY --chown=${NB_UID}:${NB_GID} binder/start-postgresql.sh "${HOME}"/start-postgresql.sh
+COPY --chown=${NB_UID}:${NB_GID} binder/stop-postgresql.sh "${HOME}"/stop-postgresql.sh
