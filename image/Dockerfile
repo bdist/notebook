@@ -1,5 +1,7 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
+FROM clickhouse/clickhouse-server:latest AS clickhouse
+
 FROM quay.io/jupyter/minimal-notebook:2025-12-15
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
@@ -18,6 +20,11 @@ RUN apt-get update --yes && \
     dvipng \
     lmodern && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install ClickHouse Client
+COPY --from=clickhouse /usr/bin/clickhouse /usr/bin/clickhouse
+COPY --from=clickhouse /usr/bin/clickhouse-client /usr/bin/clickhouse-client
+RUN clickhouse-client --version
 
 USER ${NB_UID}
 
@@ -101,6 +108,14 @@ RUN mamba install --yes \
 # Install PostgreSQL extras
 RUN mamba install --yes \
     'pgcli' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install ClickHouse Python drivers
+RUN mamba install --yes \
+    'clickhouse-connect' \
+    'clickhouse-driver' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
