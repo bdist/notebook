@@ -5,7 +5,7 @@ FROM clickhouse/clickhouse-server:latest AS clickhouse
 FROM quay.io/jupyter/minimal-notebook:2025-12-15
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
-ARG NB_BUILD=0
+ARG NB_BUILD=1
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
