@@ -28,6 +28,14 @@ RUN clickhouse-client --version
 
 USER ${NB_UID}
 
+# Try to update jupyterlab to latest version
+RUN mamba update --yes \
+    'jupyterlab' \
+    'notebook' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
 # Install Python 3 packages
 RUN mamba install --yes \
     'conda-forge::blas=*=openblas' \
