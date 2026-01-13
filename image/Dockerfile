@@ -147,5 +147,3 @@ USER ${NB_UID}
 
 COPY --chown=${NB_UID}:${NB_GID} ./.psqlrc ${HOME}/.psqlrc
 COPY --chown=${NB_UID}:${NB_GID} ./.sqliterc ${HOME}/.sqliterc
-
-WORKDIR "${HOME}"
