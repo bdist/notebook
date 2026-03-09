@@ -2,7 +2,7 @@
 # Distributed under the terms of the Modified BSD License.
 FROM clickhouse/clickhouse-server:latest AS clickhouse
 
-FROM quay.io/jupyter/minimal-notebook:2026-03-02
+FROM quay.io/jupyter/minimal-notebook:2026-03-09
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 ARG NB_BUILD=0
