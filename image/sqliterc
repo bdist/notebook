@@ -1,0 +1,6 @@
+-- Display settings
+.headers on        -- default: off
+.timer on          -- default: off
+
+-- Set default null display
+.nullvalue NULL    -- default: (empty string)
