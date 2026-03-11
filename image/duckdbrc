@@ -1,9 +1,9 @@
 -- Display settings
-.headers on        -- default: off
-.timer on          -- default: off
+.headers on
+.timer on
 
 -- Set default null display
-.nullvalue NULL    -- default: (empty string)
+.nullvalue NULL
 
 -- Enable progress bar for long queries
-SET enable_progress_bar = true;   -- default: false
+SET enable_progress_bar = true;
