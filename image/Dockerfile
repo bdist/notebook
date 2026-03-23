@@ -86,11 +86,10 @@ RUN echo 'redis-server=7.2.*' >> "${CONDA_DIR}/conda-meta/pinned" && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install DuckDB and SQLalchemy driver
+# Install DuckDB CLI and HTTPFS extension
 RUN mamba install --yes \
-    'duckdb-cli' \
-    'duckdb-engine' \
-    'python-duckdb' && \
+    'duckdb' && \
+    'duckdb-extension-httpfs' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
@@ -124,6 +123,14 @@ RUN mamba install --yes \
 RUN mamba install --yes \
     'clickhouse-connect' \
     'clickhouse-driver' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install PyDuckDB and SQLalchemy driver
+RUN mamba install --yes \
+    'duckdb-engine' \
+    'python-duckdb' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
