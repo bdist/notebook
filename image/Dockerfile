@@ -88,7 +88,7 @@ RUN echo 'redis-server=7.2.*' >> "${CONDA_DIR}/conda-meta/pinned" && \
 
 # Install DuckDB CLI and HTTPFS extension
 RUN mamba install --yes \
-    'duckdb' \
+    'duckdb-cli' \
     'duckdb-extension-httpfs' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
