@@ -149,6 +149,7 @@ RUN pip install --no-cache-dir \
     rm -rf "${HOME}/.cache/pip" && \
     rm -rf "${HOME}/.npm" && \
     rm -rf "${HOME}/.yarn" && \
+    rm -rf /tmp/node-compile-cache* && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
