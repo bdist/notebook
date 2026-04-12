@@ -146,9 +146,9 @@ RUN mamba install --yes \
 RUN pip install --no-cache-dir \
     'git+https://github.com/bdist/jupysql.git' \
     'git+https://github.com/bdist/jupysql-plugin.git' && \
-    pip cache purge && \
-    npm cache clean --force && \
-    jlpm cache clean && \
+    rm -rf "${HOME}/.cache/pip" && \
+    rm -rf "${HOME}/.npm" && \
+    rm -rf "${HOME}/.yarn" && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
