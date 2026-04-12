@@ -148,7 +148,7 @@ RUN pip install --no-cache-dir \
     'git+https://github.com/bdist/jupysql-plugin.git' && \
     pip cache purge && \
     npm cache clean --force && \
-    yarn cache clean && \
+    jlpm cache clean && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
