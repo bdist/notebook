@@ -20,7 +20,7 @@ jobs:
           package-name: ${{ github.event.repository.name }}
           package-type: container
           delete-only-untagged-versions: true
-          num-old-versions-to-delete: 100
+          min-versions-to-keep: 0
 
       - name: Keep only latest tagged GHCR package versions
         uses: actions/delete-package-versions@v5
