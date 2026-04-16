@@ -18,7 +18,7 @@ Redis is the most used NoSQL database.
 
 ## Quick Start
 
-You can [try a relatively recent build of the ghcr.io/bdist/notebook image on mybinder.org](https://mybinder.org/v2/gh/bdist/notebook/main?urlpath=lab/tree/README.ipynb).
+You can [try a relatively recent build of the bdist/notebook image on mybinder.org](https://mybinder.org/v2/gh/bdist/notebook/main?urlpath=lab/tree/README.ipynb).
 
 ## Credits
 
