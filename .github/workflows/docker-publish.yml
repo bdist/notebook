@@ -6,6 +6,7 @@ env:
   QUAY_REPO: quay.io/${{ github.repository }}
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - ".github/workflows/docker-publish.yml"
