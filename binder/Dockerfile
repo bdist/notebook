@@ -1,10 +1,10 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
 
-# https://ghcr.io/bdist/notebook?tab=tags
-ARG REGISTRY=ghcr.io
+# https://quay.io/repository/bdist/notebook?tab=tags
+ARG REGISTRY=quay.io
 ARG OWNER=bdist
-ARG BASE_IMAGE=$REGISTRY/$OWNER/notebook:edge
+ARG BASE_IMAGE=$REGISTRY/$OWNER/notebook:latest
 FROM $BASE_IMAGE
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
@@ -13,7 +13,7 @@ LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ENV TAG="edge"
+ENV TAG="latest"
 
 COPY --chown=${NB_UID}:${NB_GID} binder/README.ipynb "${HOME}"/README.ipynb
 
