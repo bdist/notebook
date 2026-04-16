@@ -25,6 +25,10 @@ on:
       - "!README.md"
       - "requirements-dev.txt"
 
+concurrency:
+  group: ghcr-publish
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}

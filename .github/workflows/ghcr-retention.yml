@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: "15 3 * * *"
 
+concurrency:
+  group: ghcr-publish
+  cancel-in-progress: false
+
 jobs:
   cleanup:
     runs-on: ubuntu-24.04
