@@ -1,0 +1,30 @@
+name: GHCR Retention
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 3 * * *"
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Delete untagged GHCR package versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ github.event.repository.name }}
+          package-type: container
+          delete-only-untagged-versions: true
+          num-old-versions-to-delete: 100
+
+      - name: Keep only latest tagged GHCR package versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ github.event.repository.name }}
+          package-type: container
+          min-versions-to-keep: 5
