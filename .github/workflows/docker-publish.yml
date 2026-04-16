@@ -156,7 +156,6 @@ jobs:
             type=ref,event=branch
             type=ref,event=tag
             type=edge,branch=main
-            type=sha
 
       - name: Create manifest list and push
         if: github.event_name != 'pull_request'
