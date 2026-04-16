@@ -18,17 +18,13 @@ jobs:
       packages: write
 
     steps:
-      - name: Delete untagged GHCR package versions
+      # Each multi-arch build produces 2 per-arch digest manifests + 1 manifest list.
+      # Per-arch digests are always untagged but are referenced by the manifest list,
+      # so they must not be deleted independently. Keep enough versions to cover
+      # 5 releases * 3 versions each = 15 minimum.
+      - name: Keep only latest GHCR package versions
         uses: actions/delete-package-versions@v5
         with:
           package-name: ${{ github.event.repository.name }}
           package-type: container
-          delete-only-untagged-versions: true
-          min-versions-to-keep: 0
-
-      - name: Keep only latest tagged GHCR package versions
-        uses: actions/delete-package-versions@v5
-        with:
-          package-name: ${{ github.event.repository.name }}
-          package-type: container
-          min-versions-to-keep: 5
+          min-versions-to-keep: 15
