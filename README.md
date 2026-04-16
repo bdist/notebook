@@ -1,6 +1,6 @@
 # Jupyter Notebook Databases Stack
 
-[Source on GitHub](https://github.com/bdist/notebook) | [Dockerfile commit history](https://github.com/bdist/notebook/commits/main/notebook/Dockerfile) | [Docker Hub image tags](https://hub.docker.com/r/bdist/notebook/tags/)
+[Source on GitHub](https://github.com/bdist/notebook) | [Dockerfile commit history](https://github.com/bdist/notebook/commits/main/notebook/Dockerfile) | [Quay.io image tags](https://quay.io/repository/bdist/notebook?tab=tags)
 
 bdist/notebook includes popular packages from the scientific Python ecosystem.
 
