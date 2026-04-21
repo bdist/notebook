@@ -18,7 +18,9 @@ RUN apt-get update --yes && \
     # for latex labels
     cm-super \
     dvipng \
-    lmodern && \
+    lmodern \
+    # for PostgreSQL migrations
+    pgloader && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install ClickHouse Client
