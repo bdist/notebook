@@ -4,7 +4,7 @@
 
 bdist/notebook includes popular packages from the scientific Python ecosystem.
 
-Everything in [jupyter/minimal-notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-minimal-notebook) and its ancestor images
+Everything in [jupyter/scipy-notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-minimal-notebook) and its ancestor images
 
 jupysql to run SQL in Jupyter/IPython via a %sql and %%sql magics.
 
