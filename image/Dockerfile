@@ -1,6 +1,6 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
-FROM quay.io/jupyter/minimal-notebook:2026-06-13
+FROM quay.io/jupyter/scipy-notebook:2026-06-13
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 ARG NB_BUILD=0
@@ -15,29 +15,11 @@ USER root
 
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
-    # for latex labels
-    cm-super \
-    dvipng \
-    lmodern \
     # for PostgreSQL migrations
     pgloader && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_UID}
-
-# Install Python 3 packages
-RUN mamba install --yes \
-    'conda-forge::blas=*=openblas' \
-    'ipywidgets' \
-    'jupyterlab-git' \
-    'openpyxl' \
-    'pandas' \
-    'sqlalchemy' \
-    'widgetsnbextension' \
-    'xlrd' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
 
 # Install PostgreSQL
 RUN echo "libpq=${LIBPQ_PIN}" >> "${CONDA_DIR}/conda-meta/pinned" && \
