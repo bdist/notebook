@@ -98,15 +98,23 @@ RUN mamba install --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install JupySQL
+# Install utility extras
 RUN mamba install --yes \
-    'jupysql' \
-    'jupysql-plugin' && \
+    'jupyterlab_execute_time' \
+    'jupyterlab-spellchecker' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install nodejs
+# Install collaboration extras
+RUN mamba install --yes \
+    'jupyter-archive' \
+    'jupyter-collaboration' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install nodejs (for JupySQL build below)
 RUN mamba install --yes \
     'nodejs' && \
     mamba clean --all -f -y && \
@@ -121,22 +129,6 @@ RUN pip install --no-cache-dir \
     rm -rf "${HOME}/.npm" && \
     rm -rf "${HOME}/.yarn" && \
     rm -rf /tmp/node-compile-cache* && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install utility extras
-RUN mamba install --yes \
-    'jupyterlab_execute_time' \
-    'jupyterlab-spellchecker' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install collaboration extras
-RUN mamba install --yes \
-    'jupyter-archive' \
-    'jupyter-collaboration' && \
-    mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
