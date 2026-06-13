@@ -1,11 +1,11 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
-FROM clickhouse/clickhouse-server:latest AS clickhouse
-
 FROM quay.io/jupyter/minimal-notebook:2026-06-13
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 ARG NB_BUILD=0
+ARG LIBPQ_PIN='18.*'
+ARG REDIS_SERVER_PIN='8.8.*'
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
@@ -22,11 +22,6 @@ RUN apt-get update --yes && \
     # for PostgreSQL migrations
     pgloader && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install ClickHouse Client
-COPY --from=clickhouse /usr/bin/clickhouse /usr/bin/clickhouse
-COPY --from=clickhouse /usr/bin/clickhouse-client /usr/bin/clickhouse-client
-RUN clickhouse-client --version
 
 USER ${NB_UID}
 
@@ -45,7 +40,7 @@ RUN mamba install --yes \
     fix-permissions "/home/${NB_USER}"
 
 # Install PostgreSQL
-RUN echo 'libpq=18.*' >> "${CONDA_DIR}/conda-meta/pinned" && \
+RUN echo "libpq=${LIBPQ_PIN}" >> "${CONDA_DIR}/conda-meta/pinned" && \
     mamba install --yes \
     postgresql && \
     mamba clean --all -f -y && \
@@ -71,7 +66,7 @@ RUN mamba install --yes \
     fix-permissions "/home/${NB_USER}"
 
 # Install redis
-RUN echo 'redis-server=7.2.*' >> "${CONDA_DIR}/conda-meta/pinned" && \
+RUN echo "redis-server=${REDIS_SERVER_PIN}" >> "${CONDA_DIR}/conda-meta/pinned" && \
     mamba install --yes \
     'redis-server' \
     'redis-py' && \
@@ -109,14 +104,6 @@ RUN mamba install --yes \
 RUN mamba install --yes \
     'pgcli' \
     'pspg' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install ClickHouse Python drivers
-RUN mamba install --yes \
-    'clickhouse-connect' \
-    'clickhouse-driver' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
