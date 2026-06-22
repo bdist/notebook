@@ -61,7 +61,7 @@ jobs:
             ${{ env.QUAY_REPO }}
 
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Login to GHCR
         if: github.event_name != 'pull_request'
