@@ -42,6 +42,9 @@ RUN initdb \
     --auth-local=md5 \
     --auth-host=md5
 
+# apply custom PostgreSQL settings
+COPY --chown=${NB_UID}:${NB_GID} binder/postgresql.conf "$PGDATA"/postgresql.conf
+
 # create scripts for PostgreSQL
 COPY --chown=${NB_UID}:${NB_GID} binder/start-postgresql.sh "${HOME}"/start-postgresql.sh
 COPY --chown=${NB_UID}:${NB_GID} binder/stop-postgresql.sh "${HOME}"/stop-postgresql.sh
