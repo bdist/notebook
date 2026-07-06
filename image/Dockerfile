@@ -15,6 +15,9 @@ USER root
 
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
+    dnsutils \
+    iputils-ping \
+    netcat-openbsd \
     # for PostgreSQL migrations
     pgloader && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -31,6 +34,7 @@ RUN echo "libpq=${LIBPQ_PIN}" >> "${CONDA_DIR}/conda-meta/pinned" && \
 
 # Install utils
 RUN mamba install --yes \
+    '7zip' \
     'bat' \
     'fd-find' \
     'file' \
@@ -39,10 +43,27 @@ RUN mamba install --yes \
     'htop' \
     'jc' \
     'jq' \
+    'lftp' \
     'ncdu' \
     'ripgrep' \
     'rclone' \
-    'rsync' && \
+    'rsync' \
+    'zip' \
+    'zstd' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install special extras
+RUN mamba install --yes \
+    'charset-normalizer' \
+    'dateparser' \
+    'ftfy' \
+    'html5lib' \
+    'langcodes' \
+    'lxml' \
+    'tld' \
+    'yarl' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
