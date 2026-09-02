@@ -121,6 +121,7 @@ RUN mamba install --yes \
 
 # Install utility extras
 RUN mamba install --yes \
+    'jupyter-archive' \
     'jupyterlab_execute_time' \
     'jupyterlab-spellchecker' && \
     mamba clean --all -f -y && \
@@ -129,7 +130,6 @@ RUN mamba install --yes \
 
 # Install collaboration extras
 RUN mamba install --yes \
-    'jupyter-archive' \
     'jupyter-collaboration' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
