@@ -144,8 +144,8 @@ RUN mamba install --yes \
 
 # Install JupySQL (customized)
 RUN pip install --no-cache-dir \
-    'git+https://github.com/bdist/jupysql.git' \
-    'git+https://github.com/bdist/jupysql-plugin.git' && \
+    'git+https://github.com/bdist/jupysql.git@10b573668a12fa414719f9d2a547f1c6eb62e19b' \
+    'git+https://github.com/bdist/jupysql-plugin.git@d3a8548d49215758613620a253da8f85609eac81' && \
     rm -rf "${HOME}/.cache/pip" && \
     rm -rf "${HOME}/.npm" && \
     rm -rf "${HOME}/.yarn" && \
