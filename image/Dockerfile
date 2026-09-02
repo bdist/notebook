@@ -137,7 +137,7 @@ RUN mamba install --yes \
 
 # Install nodejs (for JupySQL build below)
 RUN mamba install --yes \
-    'nodejs' && \
+    'nodejs=24' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
