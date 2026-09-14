@@ -6,6 +6,7 @@ LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 ARG NB_BUILD=0
 ARG LIBPQ_PIN='18.*'
 ARG REDIS_SERVER_PIN='8.8.*'
+ARG NODEJS_PIN='24.*'
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
@@ -136,8 +137,9 @@ RUN mamba install --yes \
     fix-permissions "/home/${NB_USER}"
 
 # Install nodejs (for JupySQL build below)
-RUN mamba install --yes \
-    'nodejs=24' && \
+RUN echo "nodejs=${NODEJS_PIN}" >> "${CONDA_DIR}/conda-meta/pinned" && \
+    mamba install --yes \
+    'nodejs' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
