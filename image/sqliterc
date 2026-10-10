@@ -1,5 +1,5 @@
 -- Display settings
-.headers on
+.mode --rowcount on
 .timer on
 
 -- Set default null display
