@@ -88,9 +88,9 @@ RUN mamba install --yes \
 
 # Install sqlite
 RUN mamba install --yes \
+    'dbhash' \
     'sqlite' \
     'sqldiff' \
-    'sqlite_analyzer' \
     'sqlite_rsync' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
