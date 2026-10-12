@@ -1,9 +1,9 @@
 # Copyright (c) BDist Development Team
 # Distributed under the terms of the Modified BSD License.
-FROM quay.io/jupyter/scipy-notebook:2026-10-05
+FROM quay.io/jupyter/scipy-notebook:2026-10-12
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
-ARG NB_BUILD=3
+ARG NB_BUILD=0
 ARG LIBPQ_PIN='18.*'
 ARG REDIS_SERVER_PIN='8.*'
 ARG NODEJS_PIN='24.*'
