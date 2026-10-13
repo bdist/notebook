@@ -37,9 +37,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-24.04
+          - os: ubuntu-26.04
             platform: linux/amd64
-          - os: ubuntu-24.04-arm
+          - os: ubuntu-26.04-arm
             platform: linux/arm64
 
     permissions:
@@ -110,7 +110,7 @@ jobs:
           retention-days: 1
 
   merge:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs:
       - build
 
