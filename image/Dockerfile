@@ -35,6 +35,56 @@ RUN echo "libpq=${LIBPQ_PIN}" >> "${CONDA_DIR}/conda-meta/pinned" && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
+# Install PostgreSQL Python drivers
+RUN pip install --no-cache-dir \
+    'psycopg[c]' \
+    rm -rf "${HOME}/.cache/pip" && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install PostgreSQL extras
+RUN mamba install --yes \
+    'pgcli' \
+    'pspg' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install sqlite
+RUN mamba install --yes \
+    'dbhash' \
+    'sqlite' \
+    'sqldiff' \
+    'sqlite_rsync' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install redis
+RUN echo "redis-server=${REDIS_SERVER_PIN}" >> "${CONDA_DIR}/conda-meta/pinned" && \
+    mamba install --yes \
+    'redis-server' \
+    'redis-py' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install PyDuckDB and SQLalchemy driver
+RUN mamba install --yes \
+    'duckdb-engine' \
+    'python-duckdb' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install DuckDB CLI and HTTPFS extension
+RUN mamba install --yes \
+    'duckdb-cli' \
+    'duckdb-extension-httpfs' && \
+    mamba clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
 # Install utils
 RUN mamba install --yes \
     '7zip' \
@@ -67,57 +117,6 @@ RUN mamba install --yes \
     'lxml' \
     'tld' \
     'yarl' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install redis
-RUN echo "redis-server=${REDIS_SERVER_PIN}" >> "${CONDA_DIR}/conda-meta/pinned" && \
-    mamba install --yes \
-    'redis-server' \
-    'redis-py' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install DuckDB CLI and HTTPFS extension
-RUN mamba install --yes \
-    'duckdb-cli' \
-    'duckdb-extension-httpfs' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install sqlite
-RUN mamba install --yes \
-    'dbhash' \
-    'sqlite' \
-    'sqldiff' \
-    'sqlite_rsync' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install PostgreSQL Python drivers
-RUN mamba install --yes \
-    'psycopg' \
-    'psycopg-c' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install PostgreSQL extras
-RUN mamba install --yes \
-    'pgcli' \
-    'pspg' && \
-    mamba clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
-# Install PyDuckDB and SQLalchemy driver
-RUN mamba install --yes \
-    'duckdb-engine' \
-    'python-duckdb' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
