@@ -43,9 +43,9 @@ RUN pip install --no-cache-dir \
     fix-permissions "/home/${NB_USER}"
 
 # Install PostgreSQL extras
-RUN mamba install --yes \
+RUN pip install --no-cache-dir \
     'pgcli' && \
-    mamba clean --all -f -y && \
+    rm -rf "${HOME}/.cache/pip" && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
