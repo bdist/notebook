@@ -4,6 +4,8 @@
 -- Don't display the "helpful" message on startup.
 \set QUIET 1
 \pset null '[NULL]'
+\pset display_true true
+\pset display_false false
 
 -- http://www.postgresql.org/docs/9.3/static/app-psql.html#APP-PSQL-PROMPTING
 \set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
