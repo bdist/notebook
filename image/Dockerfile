@@ -4,7 +4,7 @@ FROM quay.io/jupyter/scipy-notebook:2026-10-18
 
 LABEL maintainer="Flavio Martins <flavio.f.martins@tecnico.ulisboa.pt>"
 ARG NB_BUILD=0
-ARG LIBPQ_PIN='18.*'
+ARG LIBPQ_PIN='19.*'
 ARG REDIS_SERVER_PIN='8.*'
 ARG NODEJS_PIN='24.*'
 
@@ -28,6 +28,8 @@ USER ${NB_UID}
 # Install PostgreSQL
 RUN echo "libpq=${LIBPQ_PIN}" >> "${CONDA_DIR}/conda-meta/pinned" && \
     mamba install --yes \
+    -c conda-forge/label/postgresql_rc \
+    -c conda-forge \
     postgresql && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
