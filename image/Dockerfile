@@ -37,7 +37,7 @@ RUN echo "libpq=${LIBPQ_PIN}" >> "${CONDA_DIR}/conda-meta/pinned" && \
 
 # Install PostgreSQL Python drivers
 RUN pip install --no-cache-dir \
-    'psycopg[c]' \
+    'psycopg[c]' && \
     rm -rf "${HOME}/.cache/pip" && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
