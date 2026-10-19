@@ -1,13 +1,9 @@
--- Official docs: http://www.postgresql.org/docs/9.3/static/app-psql.html
--- Unofficial docs: http://robots.thoughtbot.com/improving-the-command-line-postgres-experience
+-- Official docs: http://www.postgresql.org/docs/19/static/app-psql.html
 
 -- Don't display the "helpful" message on startup.
 \set QUIET 1
-\pset null '[NULL]'
-\pset display_true true
-\pset display_false false
 
--- http://www.postgresql.org/docs/9.3/static/app-psql.html#APP-PSQL-PROMPTING
+-- http://www.postgresql.org/docs/19.0/static/app-psql.html#APP-PSQL-PROMPTING
 \set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
 -- PROMPT2 is printed when the prompt expects more input, like when you type
 -- SELECT * FROM<enter>. %R shows what type of input it expects.
@@ -16,7 +12,13 @@
 -- Use best available output format
 \x auto
 \set VERBOSITY verbose
-\set HISTFILE ~/.psql_history- :DBNAME
-\set HISTCONTROL ignoredups
+\set HISTFILE ~/.psql_history-:DBNAME
+\set HISTCONTROL ignoreboth
 \set COMP_KEYWORD_CASE upper
+
+-- Set display preferences
+\pset null 'NULL'
+\pset display_true 'TRUE'
+\pset display_false 'FALSE'
+
 \unset QUIET
