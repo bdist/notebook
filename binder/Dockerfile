@@ -43,6 +43,14 @@ RUN initdb \
     --auth-local=md5 \
     --auth-host=md5
 
+# create an application role and database
+RUN pg_ctl -D "$PGDATA" -l "$PGDATA/postgresql.log" -w start \
+    && PGPASSWORD=postgres psql --username="$PGUSER" --dbname="$PGDATABASE" \
+        --set ON_ERROR_STOP=1 \
+        --command="CREATE USER db WITH PASSWORD 'db'" \
+        --command="CREATE DATABASE db WITH OWNER db ENCODING 'UTF8'" \
+    && pg_ctl -D "$PGDATA" -m fast -w stop
+
 # apply custom PostgreSQL settings
 COPY --chown=${NB_UID}:${NB_GID} binder/postgresql.conf "$PGDATA"/postgresql.conf
 
