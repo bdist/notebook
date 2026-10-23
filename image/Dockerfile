@@ -78,8 +78,7 @@ RUN mamba install --yes \
 
 # Install DuckDB CLI and HTTPFS extension
 RUN mamba install --yes \
-    'duckdb-cli' \
-    'duckdb-extension-httpfs' && \
+    'duckdb-cli' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
