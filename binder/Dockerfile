@@ -40,8 +40,8 @@ RUN initdb \
     --pwfile=<(printf "%s\n" "postgres") \
     --encoding=UTF8 \
     --locale=C \
-    --auth-local=md5 \
-    --auth-host=md5
+    --auth-local=scram-sha-256 \
+    --auth-host=scram-sha-256
 
 # create an application role and database
 RUN pg_ctl -D "$PGDATA" -l "$PGDATA/postgresql.log" -w start \
